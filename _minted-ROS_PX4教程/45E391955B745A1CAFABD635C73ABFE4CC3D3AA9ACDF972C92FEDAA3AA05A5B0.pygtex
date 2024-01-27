@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }timedatectl\PYG{+w}{ }status
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} 查看系统时间状态}
+
+\PYG{+w}{    }timedatectl\PYG{+w}{ }set\PYGZhy{}local\PYGZhy{}rtc\PYG{+w}{ }\PYG{l+m}{1}
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} 设置Ubuntu系统时间与BIOS同步}
+
+\PYG{+w}{    }timedatectl\PYG{+w}{ }status
+\PYG{+w}{    }\PYG{c+c1}{\PYGZsh{} 此条命令可以不用输入，也是用于查看修改后的系统时间状态，会有一个Warning输出。}
+\end{Verbatim}

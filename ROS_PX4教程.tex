@@ -1,0 +1,80 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{minted}
+\usepackage{appendix}
+\usepackage{hyperref}
+\renewcommand\contentsname{\textbf{Content}}
+
+
+\begin{document}
+\author{Wei Hu}
+\date{\today}
+\title{\textbf{ROS PX4 仿真教程}}
+\maketitle
+\tableofcontents
+\section{Ubuntu安装}
+\section{Ubuntu下ROS开发的配置}
+\subsection{相关软件安装}
+这一部分是为了更好的使用\texttt{ROS}，我们需要下载以下几个软件
+\begin{itemize}
+    \item [1.]\href{https://code.visualstudio.com/download}{Visual Studio code},
+          其中很多插件可以使得编写代码更为方便快捷。插件推荐:C/C++，Cmake，Python，ROS.
+    \item [2.]\href{https://www.google.com/chrome/}{Google Chrome},
+          使用\texttt{Google}的话需要
+          自己的电脑有科学上网的能力，如果不能够科学上网，
+          可以使用\texttt{Ubuntu}自带的\texttt{Firefox}浏览器，在设置里将浏览器修改为\texttt{Bing}就可以了。
+    \item [3.]\href{https://git-scm.com/downloads}{git},一般而言，
+          如果正确安装t\texttt{Ubuntu}的话，在命令行输入\texttt{Git}
+          就会有相关内容显示，关于\texttt{Git}相关的教程请看附录
+    \item [4.]\href{https://www.vim.org/download.php}{Vim},一个可以集成到终端中的代码编辑器，不用离开终端，
+          只需输入命令就可以在终端直接编辑文件。
+          当然了，在\texttt{Ubuntu}下可以直接使用命令行输入命令
+          \mintinline{bash}{sudo apt install vim},但是令人头疼的也是它的上手门槛，
+          相关简单操作以及\texttt{Vim}配置见附录。
+\end{itemize}
+\subsection{Ubuntu系统配置}
+\subsubsection{系统时间设置}
+完成双系统安装完成之后，\texttt{Ubuntu}系统与原有的\texttt{Windows}系统的时间会发生错乱
+,\href{URLhttps://zhuanlan.zhihu.com/p/492885761}{双系统下的时间错乱}，总而言之就是两个系统对于主板上的`BIOS'时间认识不一致
+，解决方法如下命令
+\begin{minted}{bash}
+    timedatectl status 
+    # 查看系统时间状态
+
+    timedatectl set-local-rtc 1 
+    # 设置Ubuntu系统时间与BIOS同步
+    
+    timedatectl status 
+    # 此条命令可以不用输入，也是用于查看修改后的系统时间状态，会有一个Warning输出。
+\end{minted}
+\subsubsection{中文输入法}
+进入设置，
+\section{ROS安装}
+
+\href{URLhttps://wiki.ros.org/ROS/Introduction}{ROS介绍}
+\href{https://wiki.ros.org/noetic/Installation/Ubuntu}{ROS安装}
+
+\section{PX4仓库克隆及编译}
+在正式克隆\texttt{PX4}仓库之前需要保证以下几点
+\begin{itemize}
+    \item 成功访问\href{URLhttps://github.com/}{Github}，并且注册一个自己的\texttt{Github}账户。
+    \item 观看过附录的\textbf{Linux终端常用命令}
+    \item 观看过附录的\textbf{Git简易教程}
+\end{itemize}
+\begin{appendices}
+    \renewcommand{\thesection}{\Alph{section}}
+    \section{附录标题}
+    \section{Linux终端常用命令}
+    \begin{itemize}
+        \item 打开终端：\mintinline{bash}|Ctrl + Alt + t|
+        \item 在终端下切换目录：\mintinline{bash}| cd <path> |\\
+              回到上一级目录\mintinline{bash}| cd .. |\\
+              \mintinline{bash}| . |表示当前目录，所以也可以使用相对于当前目录来使用\mintinline{bash}| cd |命令来切换目录，如果当前目录的父目录有个叫\mintinline{bash}| test |的目录，
+              则可以使用命令\mintinline{bash}| cd ../test |来切换到\mintinline{bash}| test |目录\\
+              如果当前目录下有个子目录\mintinline{bash}| child |下
+    \end{itemize}
+    \section{Git 简易教程}
+    \section{Vim 简易教程及其配置}
+\end{appendices}
+
+\end{document}
