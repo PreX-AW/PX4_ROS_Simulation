@@ -1,42 +1,54 @@
-\documentclass[UTF8]{article}
-\usepackage{ctex}
+\documentclass{article}
+\usepackage[UTF8]{ctex}
 \usepackage{minted}
 \usepackage{appendix}
 \usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper}
+\geometry{centering}
+\geometry{left=2cm}
+\geometry{right=2cm}
+\geometry{top=1cm}
+\geometry{bottom=1cm}
 \renewcommand\contentsname{\textbf{Content}}
+\newcommand\mintbash[1]{\mintinline{bash}| #1 |}
+\newcommand\bash[1]{\mintinline{bash}| #1 |}
 
 
 \begin{document}
 \author{Wei Hu}
 \date{\today}
 \title{\textbf{ROS PX4 仿真教程}}
+
 \maketitle
-\tableofcontents
-\section{Ubuntu安装}
+%\section{Ubuntu安装}
+%使用\href{URLhttps://rufus.ie/en/}{Rufus}制作系统镜像盘,注意新一点的电脑选择GPT硬盘格式,UEFI启动,之后制作镜像启动盘即可
+
 \section{Ubuntu下ROS开发的配置}
 \subsection{相关软件安装}
-这一部分是为了更好的使用\texttt{ROS}，我们需要下载以下几个软件
+这一部分是为了更好的使用\texttt{ROS},我们需要下载以下几个软件
 \begin{itemize}
     \item [1.]\href{https://code.visualstudio.com/download}{Visual Studio code},
-          其中很多插件可以使得编写代码更为方便快捷。插件推荐:C/C++，Cmake，Python，ROS.
+          其中很多插件可以使得编写代码更为方便快捷.插件推荐:C/C++,Cmake,Python,ROS.
     \item [2.]\href{https://www.google.com/chrome/}{Google Chrome},
           使用\texttt{Google}的话需要
-          自己的电脑有科学上网的能力，如果不能够科学上网，
-          可以使用\texttt{Ubuntu}自带的\texttt{Firefox}浏览器，在设置里将浏览器修改为\texttt{Bing}就可以了。
-    \item [3.]\href{https://git-scm.com/downloads}{git},一般而言，
-          如果正确安装t\texttt{Ubuntu}的话，在命令行输入\texttt{Git}
-          就会有相关内容显示，关于\texttt{Git}相关的教程请看附录
-    \item [4.]\href{https://www.vim.org/download.php}{Vim},一个可以集成到终端中的代码编辑器，不用离开终端，
-          只需输入命令就可以在终端直接编辑文件。
-          当然了，在\texttt{Ubuntu}下可以直接使用命令行输入命令
-          \mintinline{bash}{sudo apt install vim},但是令人头疼的也是它的上手门槛，
-          相关简单操作以及\texttt{Vim}配置见附录。
+          自己的电脑有科学上网的能力,如果不能够科学上网,
+          可以使用\texttt{Ubuntu}自带的\texttt{Firefox}浏览器,在设置里将浏览器修改为\texttt{Bing}就可以了.
+    \item [3.]\href{https://git-scm.com/downloads}{Git},一般而言,
+          如果正确安装t\texttt{Ubuntu}的话,在命令行输入\texttt{Git}
+          就会有相关内容显示,关于\texttt{Git}相关的教程请看附录
+    \item [4.]\href{https://www.vim.org/download.php}{Vim},一个可以集成到终端中的代码编辑器,不用离开终端,
+          只需输入命令就可以在终端直接编辑文件.
+          当然了,在\texttt{Ubuntu}下可以直接使用命令行输入命令
+          \mintinline{bash}{sudo apt install vim},但是令人头疼的也是它的上手门槛,
+          相关简单操作以及\texttt{Vim}配置见附录.
 \end{itemize}
 \subsection{Ubuntu系统配置}
 \subsubsection{系统时间设置}
-完成双系统安装完成之后，\texttt{Ubuntu}系统与原有的\texttt{Windows}系统的时间会发生错乱
-,\href{URLhttps://zhuanlan.zhihu.com/p/492885761}{双系统下的时间错乱}，总而言之就是两个系统对于主板上的`BIOS'时间认识不一致
-，解决方法如下命令
+完成双系统安装完成之后,\texttt{Ubuntu}系统与原有的\texttt{Windows}系统的时间会发生错乱
+,\href{URLhttps://zhuanlan.zhihu.com/p/492885761}{双系统下的时间错乱},
+总而言之就是两个系统对于主板上的\mintinline{bash}| BIOS |时间认识不一致
+,解决方法如下命令
 \begin{minted}{bash}
     timedatectl status 
     # 查看系统时间状态
@@ -45,22 +57,36 @@
     # 设置Ubuntu系统时间与BIOS同步
     
     timedatectl status 
-    # 此条命令可以不用输入，也是用于查看修改后的系统时间状态，会有一个Warning输出。
+    # 此条命令可以不用输入,也是用于查看修改后的系统时间状态
+    # 会有一个Warning输出.
 \end{minted}
 \subsubsection{中文输入法}
-进入设置，
+进入设置,
 \section{ROS安装}
 
 \href{URLhttps://wiki.ros.org/ROS/Introduction}{ROS介绍}
+\\
+
 \href{https://wiki.ros.org/noetic/Installation/Ubuntu}{ROS安装}
 
 \section{PX4仓库克隆及编译}
 在正式克隆\texttt{PX4}仓库之前需要保证以下几点
 \begin{itemize}
-    \item 成功访问\href{URLhttps://github.com/}{Github}，并且注册一个自己的\texttt{Github}账户。
+    \item 成功访问\href{URLhttps://github.com/}{Github},并且注册一个自己的\texttt{Github}账户.
     \item 观看过附录的\textbf{Linux终端常用命令}
     \item 观看过附录的\textbf{Git简易教程}
 \end{itemize}
+打开终端,切换到合适的目录下输入命令\mintbash{git clone https://github.com/PX4/PX4-Autopilot.git}并进入\mintbash{ PX4-Autopilot }目录,输入命令\mintbash{bash ./Tools/setup/ubuntu.sh}
+,等待命令执行结束之后,输入命令\mintbash{sudo reboot}重启计算机.
+\\
+等待重启完毕之后,进入\mintbash{PX4-Autopilot}目录,输入命令\mintbash{make px4_sitl gazebo-classic}即可启动仿真界面,并在刚刚输入命令的界面再次输入\mintbash{commander takeoff}即可实现飞机起飞
+输入命令\mintbash{commander land}可实现飞机降落
+\subsection{PX4仿真与ROS通讯}
+需要下载\mintbash{mavros}功能包,打开终端输入命令
+\begin{minted}{bash}
+    sudo apt install ros-noetic-mavros ros-noetic-mavros-extras ros-noetic-mavros-msgs
+\end{minted}
+根据官网的\href{https://docs.px4.io/main/en/ros/mavros_offboard_cpp.html}{\bash{demo}}修改对应的配置文件,启动节点即可实现\bash{ROS 与 PX4通讯}
 \begin{appendices}
     \renewcommand{\thesection}{\Alph{section}}
     \section{附录标题}
@@ -69,18 +95,48 @@
         \item 打开终端：\mintinline{bash}|Ctrl + Alt + t|
         \item 在终端下切换目录：\mintinline{bash}| cd <path> |\\
               回到上一级目录\mintinline{bash}| cd .. |\\
-              \mintinline{bash}| . |表示当前目录，所以也可以使用相对于当前目录来使用\mintinline{bash}| cd |命令来切换目录，如果当前目录的父目录有个叫\mintinline{bash}| test |的目录，
+              \mintinline{bash}| . |表示当前目录,所以也可以使用相对于当前目录来使用\mintinline{bash}| cd |命令来切换目录,
+              如果当前目录的父目录有个叫\mintinline{bash}| test |的目录,
               则可以使用命令\mintinline{bash}| cd ../test |来切换到\mintinline{bash}| test |目录\\
               如果当前目录下有个子目录\mintinline{bash}| child |下
     \end{itemize}
     \section{Git 简易教程}
-    下載git之后，需要配置自己的用户名以及用户邮箱
+    下載git之后,需要配置自己的用户名以及用户邮箱,使用\mintinline{bash}| Ctrl + Alt + t |打开终端,输入以下命令：
     \begin{minted}{bash}
         git config --global user.name "your name"
         git config --global user.email "your email"
     \end{minted}
-
+    \subsection{Github 简易使用}
+    如果是自己要在\mintbash{Github}创建仓库或者团队开发需求,首先要在自己的机器上
+    生成用于访问\mintbash{Github}\\的\mintbash{SSH}密钥,在终端输入\mintbash{ssh-keygen -r rsa -C "youremail"},如果只是个人使用的话,在输入万命令之后一路回车或者输入\mintbash{yes}即可
+    生成的密钥一般会存放在用户目录下的隐藏文件夹\mintbash{.ssh}下,拷贝该目录下一个名为\mintbash{id_ras.pub}文件中的内容,登陆\mintbash{Github},
+    转到\mintbash{Settings}中的\mintbash{SSH and GPG keys},点击\mintbash{New},将\mintbash{id_ras.pub}中的内容粘贴进去,
+    点击\mintbash{Add SSH key},之后点击\mintbash{Save}即可.
+    \subsubsection{克隆自己仓库}
+    使用命令
+    \begin{minted}{bash}
+        git clone https://github.com/yourname/yourrepository
+    \end{minted}
+    即可克隆自己的仓库,克隆到本地之后就可以开始编辑工作,
+    要想将本地的修改上传到\mintbash{Github}仓库中,
+    需要在本地仓库中执行\mintbash{git add .},然后执行\mintbash{git commit -m "commit message"},
+    最后执行\mintbash{git push}即可上传到\mintbash{Github}仓库中,如果是第一次推送的话,需要添加参数\mintbash{git push -u origin main},之后推送直接使用\mintbash{git push}即可.
+    \subsubsection{克隆他人仓库}对于公开仓库,直接使用以下命令即可克隆他人仓库
+    \begin{minted}{bash}
+    git clone https://github.com/othername/otherrepository
+\end{minted}
+    如果是私有仓库的话,需要在\mintbash{Github}中添加自己的\mintbash{SSH}密钥,然后使用下列命令，即可克隆他人仓库,克隆到本地之后就可以开始编辑工作。
+    \begin{minted}{bash}
+    git clone git@github.com:othername/otherrepository
+    \end{minted}
     \section{Vim 简易教程及其配置}
+    \subsection{Normal模式}
+    \mintbash{Vim}有多种模式,一般使用命令打开文件进入的是\mintbash{Normal}模式,可以使用\mintbash{hjkl}来进行光标的运动,
+    \mintbash{h&j}分别代表光标左右运动,\mintbash{k&j}分别代表光标上下行运动
+    然后使用\mintbash{gg}命令跳转到\emph{文件开头},使用\mintbash{dd}命令删除\emph{光标所在行},使用\mintbash{yy}复制光标所在行,使用\mintbash{p}则是粘贴之前所复制的行.、
+\subsection{Insert模式}
+在\mintbash{Normal}模式中
+    
 \end{appendices}
 
 \end{document}
